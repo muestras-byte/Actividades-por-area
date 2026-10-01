@@ -99,7 +99,7 @@ select.btn{padding:7px 8px}
 .cap{position:absolute;left:0;right:0;bottom:0;border:2px solid var(--disp);border-top-width:3px;border-radius:2px}
 .vessel .m{font-weight:600;font-size:.9rem}
 .vessel .pct{font-size:.8rem;color:var(--muted)}
-.vessel.off .track{opacity:.45}
+.vessel.off .track{opacity:.45;border-bottom:2px solid var(--line)}
 .vessel.off .over{color:var(--muted);font-weight:500;font-size:.75rem;font-family:var(--body)}
 
 /* Stats */
@@ -187,7 +187,7 @@ footer dd{margin:0}
     <div class="row">
       <input type="text" id="inUrl" placeholder="Pega aquí el enlace de la hoja (incluye #gid=… de la pestaña correcta)">
       <button class="btn primary" id="btnConnect" type="button">Conectar</button>
-      <button class="btn" id="btnDisconnect" type="button">Usar datos de ejemplo</button>
+      <button class="btn" id="btnDisconnect" type="button">Desconectar hoja</button>
     </div>
     <div class="row" style="align-items:center">
       <label class="btn" for="inFile" >Cargar CSV del equipo</label>
@@ -271,7 +271,6 @@ footer dd{margin:0}
 </main>
 
 <script>
-const EMBED = "Analista: ,,Mes,,,,,,,,,,,\nLista de actividades ,,Enero ,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre\nDescripción de la actividad,TIpo  de  función ,Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas),Frecuencia mensual (horas)\nEvaluación de la viabilidad de cepas para reactivación ,,,,,,,,,,,,,\nSiembra en medios de cultivo,Proceso en laboratorio,4,8,15,15,15,15,3,3,,,,\n\"Evaluación del Porcentaje de recuperación, de viabilidad de las cepas\",Proceso en laboratorio,2,5,5,5,5,5,5,5,,,,\n\"Evalución de la germinación, de las cepas reactivadas\",Proceso en laboratorio,4,7,7,3,7,7,\"0,5\",7,,,,\nEvaluación de la pureza de los viales de conservación,Proceso en laboratorio,5,5,5,5,5,5,5,5,,,,\nEvaluación de la estabilidad de los viales de conservación (Nitrogeno L),Proceso en laboratorio,2,2,2,2,2,2,2,2,,,,\nEvaluación de la estabilidad de los viales de conservación (Cepas Madre),Proceso en laboratorio,6,6,6,6,6,6,4,6,,,,\nReactivación de Trichoderma- (Endofitos pompon),,,,,,,,,,,,,\nPedido de esquejes (Plantas hospedero) para siembra,Proceso en invernadero,\"0,5\",\"0,5\",\"0,5\",\"0,5\",\"0,5\",\"0,5\",\"0,5\",\"0,5\",,,,\nPreparación suelo para el montaje (Pedido de Arena),Proceso en invernadero,\"0,5\",\"0,5\",\"0,5\",1,\"0,5\",\"0,5\",\"0,5\",\"0,5\",,,,\nEsterilización del suelo para montaje,Proceso en laboratorio,\"3,5\",\"3,5\",\"3,5\",\"3,5\",\"3,5\",\"3,5\",\"3,5\",\"3,5\",,,,\nPreparación de etiquetas y macetas para montaje,Proceso en invernadero,2,2,2,2,2,2,2,2,,,,\nSiembra de cepas en placa y preparación de inoculo para tratmientos,Proceso en laboratorio,3,3,3,3,3,3,3,3,,,,\nAplicacion de trataminetos (Inoculación de plantas),Proceso en invernadero,\"2,5\",\"2,5\",\"2,5\",3,\"2,5\",\"2,5\",\"2,5\",\"2,5\",,,,\nCoordianción de riego de los tratamientos y seguimiento en invernadero,Proceso en invernadero,12,12,5,\"6,5\",\"4,5\",12,12,4,,,,\nDesinfeccion de tejido para recuperación de microorganismos,Proceso en laboratorio,4,5,\"5,5\",\"5,5\",\"5,5\",\"5,5\",\"0,5\",\"5,5\",,,,\nSiembra de tejido en placa e incubación,Proceso en laboratorio,3,2,3,3,3,3,3,3,,,,\nLectura y purificación de los aislamientos,Proceso en laboratorio,3,3,3,3,3,3,3,3,,,,\n\"Reactivación de Beauveria sp, Lecanicillium sp, Metarhizium sp\",,,,,,,,,,,,,\n\"Solicitud de blancos biologicos (Broca- Mosca blanca, Trhips, afidos, tecia, Chiza, Diaphorina)\",Proceso en invernadero,2,2,2,2,2,2,2,2,,,,\nSiembra de cepas en placa y preparación de inoculo para tratmientos,Proceso en laboratorio,6,6,6,6,6,6,6,6,,,,\nEsterilización de material para el monaje,Proceso en laboratorio,3,3,3,3,3,3,3,3,,,,\nInoculación de tratamientos y seguimiento ,Proceso en laboratorio,4,4,4,4,4,4,3,4,,,,\nEvaluación del porcentaje de mortalidad por parasitismo,Proceso en laboratorio,5,5,5,5,5,5,5,5,,,,\nAislamiento de cepas provenientes de la infeccion sobre los blancos biologicos,Proceso en laboratorio,\"4,5\",\"4,5\",\"4,5\",\"4,5\",\"4,5\",\"4,5\",4,\"4,5\",,,,\nPurificacion  y  asilamiento monosporico en medio de cultivo,Proceso en laboratorio,4,5,3,7,7,7,3,7,,,,\n\"Entrega de cepas para ensayos  (Investigacion, microbiologia, fitopatologia)\",,,,,,,,,,,,,\nSiembra en medios de cultivo (Cepas y cantidad requerida),Proceso en laboratorio,4,4,4,4,4,4,3,4,,,,\nMontaje de placas y lectura en microscopio para confirmar morfologia,Proceso en laboratorio,2,2,2,2,2,2,2,2,,,,\nConfirmacion de pureza,Proceso en laboratorio,2,2,2,2,2,2,2,2,,,,\nEntrega de  cepas para produccion Terralife,,,,,,,,,,,,,\nSiembra en medios de cultivo  (Penicillium Bilaiae),Proceso en laboratorio,2,2,2,2,2,2,1,2,,,,\nSiembra en medios de cultivo  (Pseudomonas fluorescens),Proceso en laboratorio,2,2,2,2,2,2,1,1,,,,\nConfirmacion de morfologia microscopica,Proceso en laboratorio,2,2,2,2,2,2,1,2,,,,\nConfirmación de fluorescencia en medio King B para Pseudomonas fluorescens.,Proceso en laboratorio,2,2,2,2,2,2,2,2,,,,\nEvaluación de cepas con potencial para cepario (Aislados de PRB´s),,,,,,,,,,,,,\nIdentificación del micrrorganismo,Proceso en laboratorio,3,3,3,3,3,3,3,3,,,,\n\"Montaje de evaluacion (Actividad biologica) correspondiente segun sea su naturaleza( Endofito, biocontrolador, entomopatogeno.\",Proceso en laboratorio,Este mes no se hace,Este mes no se hace,\"4,5\",\"4,5\",Este mes no se hace,\"4,5\",\"4,5\",Este mes no se hace,,,,\n\"Determinación del porcentaje de actividad segun sea el caso ( parasitismo, antagonismo)\",Proceso en laboratorio,4,4,4,4,4,4,4,4,,,,\nDeterminación del porcentaje de germinación,Proceso en laboratorio,4,4,4,4,4,20,4,4,,,,\nRegistro de resultados y asignacion de codigo interno,Proceso en laboratorio,2,2,2,2,2,2,2,2,,,,\nGeneracion de documentación correspondiente al amacenamiento y uso de material biologico,Proceso en laboratorio,4,4,4,4,4,4,4,4,,,,\nConservacion de cepas ,,,,,,,,,,,,,\n\"Preparacion de material esteril (puntas, viales, descarte)\",Proceso en laboratorio,2,2,2,2,2,2,2,2,,,,\nEsterilización de medio de conservación (Solucion estandarizada en protocolo) IN-26,Proceso en laboratorio,2,2,2,2,2,2,2,2,,,,\nCodificación y almacenamiento en area correspondiente,Administrativa,2,2,2,2,2,2,2,2,,,,\nManejo documental del cepario y calidad,,,,,,,,,,,,,\nRegistro de formato de cepario (FO-140),Administrativa,3,3,3,3,3,3,3,3,,,,\nRegistro de formato de Reactivaciones (FO-90) Entregadas a producción,Administrativa,3,3,3,3,3,3,1,3,,,,\nRegistro de actividades biologicas Ssoil (FO-01),Administrativa,3,3,3,3,3,3,3,3,,,,\nRegistro de germinaciones  (FO-01) (FO-163),Administrativa,3,3,3,3,1,1,1,3,,,,\nRegistro de resultados inoculos salas de producción (FO-01),Administrativa,3,3,3,3,3,3,1,3,,,,\nControl de estabilidad de tanques de nitrogeno (FO-87),Administrativa,3,3,3,3,1,3,1,3,,,,\nPedido de Nitrogeno liquido para conservacion y registro de numero de remisión,Administrativa,3,3,3,3,3,3,1,3,,,,\nElaboración de respuestas (Certificados calidad cepario),Administrativa,3,3,3,3,3,3,1,3,,,,\nActividades  ligadas  a Calidad  ,,,,,,,,,,,,,\nMontaje control de calidad Aguas,Proceso en laboratorio,8,8,8,8,5,7,2,Este mes no se hace,,,,\nLectura de inoculos (Producción),Proceso en laboratorio,4,4,4,4,4,4,4,4,,,,\nMontaje de actividad biologica Safer soil ,Proceso en laboratorio,Este mes no se hace,Este mes no se hace,Este mes no se hace,2,2,2,Este mes no se hace,Este mes no se hace,,,,\nMontaje de actividad biologica Safergreen,Proceso en laboratorio,2,Este mes no se hace,Este mes no se hace,2,2,2,Este mes no se hace,Este mes no se hace,,,,\nEvaluacion de calidad Terralife,Proceso en laboratorio,2,2,2,2,2,2,2,2,,,,\nMontaje actividad biologica Terralife,Proceso en invernadero,Este mes no se hace,Este mes no se hace,Este mes no se hace,4,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,,,,\nRegistro de cartas control equipos de calidad,Administrativa,4,4,4,4,4,4,4,4,,,,\n\"Lectura de germianción, controles de calidad (Safermix-Safersoil)\",Proceso en laboratorio,5,5,5,5,5,5,5,5,,,,\nReporte de resultados ,Administrativa,4,4,4,4,4,4,4,4,,,,\nIdentificacion de contaminantes (apoyo a producción),Proceso en laboratorio,\"0,5\",\"0,5\",\"0,5\",\"0,5\",\"0,5\",\"0,5\",\"0,5\",\"0,5\",,,,\nPreparacion y sostenimiento material de exposicion (Visitas),Proceso en laboratorio,\"2,5\",\"2,5\",\"2,5\",\"2,5\",\"2,5\",\"2,5\",\"2,5\",\"2,5\",,,,\nMontaje de PRB's Terralife,Administrativa,1,1,1,1,1,1,1,1,,,,\nActividades  ligadas  a Brigada empresarial (SST),,,,,,,,,,,,,\nAsistencia a capacitaciones (Plan de trabajo SST),Administrativa,2,2,2,2,2,2,2,2,,,,\nRevision de equipos y botiquines,Administrativa,1,1,1,1,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,,,,\nAtención a emergencias y/o activacion de protocolos de emergencia,Administrativa,\"0,5\",\"0,5\",Este mes no se hace,\"0,5\",Este mes no se hace,Este mes no se hace,\"0,5\",\"0,5\",,,,\nPreparacion y participacion en simulacros de emergencia,Administrativa,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,,,,\nCapacitaciones SST ,Administrativa,2,1,1,1,1,1,Este mes no se hace,1,,,,\nActividades Ludicas de bienestar,Administrativa,1,1,1,Este mes no se hace,1,1,1,1,,,,\nActividades  ligadas  a  investigación (Don William),,,,,,,,,,,,,\nAsistencias a campo según lo requerido (Ensayos de Collaria sp),Administrativa,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,,,,\n\"Ejecución de ensayos según la necesidad (Collaria sp- Trichoderma sp, Pochonia, Isaria)\",Administrativa,Este mes no se hace,Este mes no se hace,Este mes no se hace,\"3,5\",\"3,5\",\"3,5\",\"3,5\",4,,,,\nDiscusion de avances y/o resultados de ensayos,Administrativa,2,2,2,2,2,2,2,2,,,,\nElaboración de informes de resultados ,Administrativa,3,3,3,3,3,3,3,3,,,,\n\"Asistenicia virtual o presnecial a charlas, capacitaciones y foros\",Administrativa,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,,,,\n\"Apoyo a montaje y/o lectura de ensayos (Nematodos, desinfecciones, producción)\",Administrativa,\"2,5\",\"2,5\",\"2,5\",\"2,5\",\"2,5\",\"2,5\",\"2,5\",\"2,5\",,,,\nDesarrollo de proyctos con entidades externas  Brocamix,Administrativa,Este mes no se hace,Este mes no se hace,Este mes no se hace,4,4,4,4,4,,,,\nEstandarización proceso de terralife,Administrativa,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,6,6,15,,,,\nTutoria a personal nuevo terralife,Proceso en invernadero,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,12,,,,\nReuniones de investigacíon,Administrativa,3,2,Este mes no se hace,1,3,6,6,8,,,,\nActividades  adicionales,,,,,,,,,,,,,\nManejo de caja menor,Administrativa,6,6,6,6,6,6,6,6,,,,\nRetiros de caja en Cajero,Administrativa,2,2,2,2,2,2,2,2,,,,\nArreglo de soportes y envio de caja fisica,Administrativa,4,4,4,4,4,4,4,4,,,,\nAtención a visitas,Administrativa,4,Este mes no se hace,4,8,4,Este mes no se hace,Este mes no se hace,2,,,,\n,,,,,,Este mes no se hace,Este mes no se hace,Este mes no se hace,Este mes no se hace,,,,\nHoras disponibles,,158,174,166,158,158,150,152,152,168,160,152,152\nTotal Horas Necesarias para completar actividades ,,\"214,5\",\"217,5\",223,\"245,5\",\"228,5\",\"265,5\",195,241,0,0,0,0\n,,,,,,,,,,,,,\n,,,,,,,,,,,,,\n,,,,,,,,,,,,,\n,,,,,,,,,,,,,\n,,,,,,,,,,,,,\nRecursos,,,,,,,,,,,,,\nBase de datos Cepario Fitos,https://docs.google.com/spreadsheets/d/1N9hMTKPxc8B5zYCz6Xzpy9CAV_YWIopP/edit?gid=1087516932#gid=1087516932,,,,,,,,,,,,\nHistorico de entregas a produccion bacterias,https://docs.google.com/spreadsheets/d/1oh4gB-h7T70b-771IeMBiw2umzBqDIJIhXFkLHXAFkE/edit?gid=1684214580#gid=1684214580,,,,,,,,,,,,\nHistorico de entregas a produccion Hongos,https://docs.google.com/spreadsheets/d/14nZsa9iyAa1bCBv0bmLE0EjoGcAzgkoJ/edit?gid=1301264793#gid=1301264793,,,,,,,,,,,,\nGantt,file:///C:/Users/Usuario/Downloads/diagrama_gantt_3_1.html,,,,,,,,,,,,";
 const MESES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 const MESES_L = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const $ = s => document.querySelector(s);
@@ -285,6 +284,8 @@ const pct = n => (n==null || isNaN(n)) ? "—" : Math.round(n*100) + " %";
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 
+const EMPTY = { acts: [], disp: Array(12).fill(null), totalHoja: null };
+let hasData = false;
 let DATA = null, CALC = null, selected = null, timer = null, charts = {};
 let sortState = { key: "total", dir: -1 };
 
@@ -349,8 +350,7 @@ async function load(){
   const raw = new URLSearchParams(location.search).get("hoja") || LS.get("fuente");
   const src = buildSource(raw);
   if (!src){
-    useText(EMBED);
-    setStatus("Datos de ejemplo (archivo del 1 de octubre). Conecta tu hoja para verlos en vivo.", "");
+    showEmpty();
     return;
   }
   setStatus("Leyendo la hoja…", "loading");
@@ -387,17 +387,31 @@ async function load(){
   causas.push("Alternativa: en la hoja ve a Archivo → Compartir → Publicar en la Web, elige la pestaña y el formato CSV, y pega aquí ese enlace.");
   setAlert("<b>No se pudo leer la hoja.</b><ul style='margin:6px 0 4px;padding-left:20px'>" + causas.map(c => "<li>" + c + "</li>").join("") +
     "</ul><span class='muted' style='font-size:.82rem'>Detalle técnico: " + esc(errores.join(" · ")) + "</span>" +
-    (DATA ? "<br>Se muestran los últimos datos leídos." : "<br>Se muestran los datos de ejemplo."), "error");
-  if (!DATA) useText(EMBED);
+    (hasData ? "<br>Se muestran los últimos datos leídos." : ""), "error");
+  if (!hasData) showEmpty(true);
 }
 
 function useText(text){
   return useRows(Papa.parse(text, { skipEmptyLines: false }).data);
 }
+function showEmpty(keepAlert){
+  hasData = false;
+  DATA = EMPTY;
+  CALC = compute(EMPTY);
+  selected = null;
+  render();
+  if (!keepAlert){
+    setAlert("");
+    setStatus("Sin hoja conectada. Abre “Fuente de datos” para vincular tu hoja o cargar un CSV.", "");
+  } else setStatus("Sin hoja conectada", "error");
+  const s = $("#settings");
+  if (!s.classList.contains("open")){ s.classList.add("open"); $("#btnSettings").setAttribute("aria-expanded", "true"); }
+}
 function useRows(rows){
   const d = parseSheet(rows);
   if (!d.acts.length) return false;
   DATA = d;
+  hasData = true;
   CALC = compute(d);
   if (selected == null || !CALC.months[selected]?.active) selected = CALC.peak ?? CALC.active[0] ?? 0;
   render();
@@ -434,7 +448,7 @@ function parseSheet(rows){
     const c0 = (r[0] || "").replace(/\s+/g, " ").trim();
     const c1 = (r[1] || "").replace(/\s+/g, " ").trim();
     if (/^horas disponibles/i.test(c0)){ disp = monthCols.map(c => num(r[c])); continue; }
-    if (/^total horas/i.test(c0)){ totalHoja = monthCols.map(c => num(r[c])); continue; }
+    if (/^total horas/i.test(c0)){ totalHoja = monthCols.map(c => num(r[c])); break; } // lo que sigue (indicadores, recursos) no suma horas
     if (/^recursos/i.test(c0)) break;
     if (!c0) continue;
     if (!c1){ area = c0; continue; }
@@ -482,7 +496,7 @@ function compute(d){
   return {
     months, active: act.map(m => m.i), R, D, E, H,
     conHolgura: act.filter(m => m.holgura > 0.05).map(m => m.i),
-    sat: D ? R / D : null, peak: peak ? peak.i : null, trend,
+    sat: D ? R / D : (R ? null : 0), peak: peak ? peak.i : null, trend,
     saturados: act.filter(m => m.exceso > 0).length,
     porTipo, porArea, mismatch
   };
@@ -499,7 +513,7 @@ function guiaMes(m){
 
 /* ---------- Render ---------- */
 function render(){
-  setAlert(CALC.mismatch.length ? "Nota: en " + CALC.mismatch.join(", ") + " la fila de total de la hoja no coincide con la suma de las actividades. El panel usa la suma de las actividades." : "", "");
+  if (hasData) setAlert(CALC.mismatch.length ? "Nota: en " + CALC.mismatch.join(", ") + " la fila de total de la hoja no coincide con la suma de las actividades. El panel usa la suma de las actividades." : "", "");
   renderVessels(); renderStats(); renderDetail(); renderCharts(); renderAreas(); renderFilters(); renderActs();
 }
 
@@ -560,6 +574,7 @@ function renderStats(){
 function renderDetail(){
   const m = CALC.months[selected];
   const el = $("#detail");
+  if (!hasData){ el.innerHTML = "<h2>Aún no hay datos</h2><p class='muted' style='margin-top:6px'>Todo el panel está en cero. Vincula la pestaña de tu hoja en “Fuente de datos” (o carga un CSV) y aquí verás el detalle de cada mes.</p>"; return; }
   if (!m || !m.active){ el.innerHTML = "<p class='muted'>Selecciona un mes con datos.</p>"; return; }
   const acts = DATA.acts.map(a => ({ ...a, v: a.h[selected] }));
   const top = acts.filter(a => a.v > 0).sort((a, b) => b.v - a.v).slice(0, 7);
